@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="echarts.min.js"></script>
+</head>
+<style>
+    div{
+        float: left;
+        margin-right: 10px;
+        margin-top: 10px;
+    }
+</style>
+<body>
+<div id="main" style="width: 300px;height:300px;background: #e4e3e3"></div>
+<div id="main1" style="width: 300px;height:300px;background: #e4e3e3"></div>
+<div id="main2" style="width: 300px;height:300px;background: #e4e3e3"></div>
+<div id="main3" style="width: 300px;height:300px;background: #e4e3e3"></div>
+<div id="main4" style="width: 500px;height:500px;background: #e4e3e3"></div>
+<script type="text/javascript">
+ let bar = echarts.init(document.getElementById('main'));
+     option = {
+        title: {
+            text: 'ECharts 入门示例',
+            show:false
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+     bar.setOption(option);
+
+
+ let line = echarts.init(document.getElementById('main1'));
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line'
+        }]
+    };
+    line.setOption(option);
+
+  let scatter=echarts.init(document.getElementById('main2'));
+    option = {
+        xAxis: {},
+        yAxis: {},
+        series: [{
+            symbolSize: 10,
+            data: [
+                [9.0, 8.04],
+                [8.0, 6.95],
+                [13.0, 7.58],
+                [9.0, 8.81],
+                [11.0, 8.33],
+                [14.0, 9.96],
+                [6.0, 7.24],
+                [4.0, 4.26],
+                [12.0, 10.84],
+                [7.0, 4.82],
+                [5.0, 5.68]
+            ],
+            type: 'scatter'
+        }]
+    };
+    scatter.setOption(option);
+
+let bar1=echarts.init(document.getElementById('main3'));
+    let xAxisData = [];
+    let data1 = [];
+    let data2 = [];
+    for (let i = 0; i < 100; i++) {
+        xAxisData.push('类目' + i);
+        data1.push((Math.sin(i / 5) * (i / 5 -10) + i / 6) * 5);
+        data2.push((Math.cos(i / 5) * (i / 5 -10) + i / 6) * 5);
+    }
+    option = {
+        title: {
+            text: '柱状图动画延迟',
+           show:false
+        },
+        legend: {
+            data: ['bar', 'bar2'],
+            align: 'left'
+        },
+        toolbox: {
+            // y: 'bottom',
+            feature: {
+                magicType: {
+                    type: ['stack', 'tiled']
+                },
+                dataView: {},
+                saveAsImage: {
+                    pixelRatio: 2
+                }
+            }
+        },
+        tooltip: {},
+        xAxis: {
+            data: xAxisData,
+            silent: false,
+            splitLine: {
+                show: false
+            }
+        },
+        yAxis: {
+        },
+        series: [{
+            name: 'bar',
+            type: 'bar',
+            data: data1,
+            animationDelay: function (idx) {
+                return idx * 10;
+            }
+        }, {
+            name: 'bar2',
+            type: 'bar',
+            data: data2,
+            animationDelay: function (idx) {
+                return idx * 10 + 100;
+            }
+        }],
+        animationEasing: 'elasticOut',
+        animationDelayUpdate: function (idx) {
+            return idx * 5;
+        }
+    };
+    bar1.setOption(option);
+ let pie = echarts.init(document.getElementById('main4'));
+
+
+ option = {
+     tooltip: {
+         trigger: 'item',
+         formatter: "{a} <br/>{b}: {c} ({d}%)"
+     },
+     legend: {
+         orient: 'vertical',
+         x: 'left',
+         data:['男','女']
+     },
+     series: [
+         {
+             name:'访问来源',
+             type:'pie',
+             radius: ['50%', '70%'],
+             avoidLabelOverlap: false,
+             label: {
+                 normal: {
+                     show: false,
+                     position: 'center'
+                 },
+                 emphasis: {
+                     show: true,
+                     textStyle: {
+                         fontSize: '30',
+                         fontWeight: 'bold'
+                     }
+                 }
+             },
+             labelLine: {
+                 normal: {
+                     show: false
+                 }
+             },
+             data:[
+                 {value:35, name:'男'},
+                 {value:15, name:'女'}
+             ]
+         }
+     ]
+ };
+
+ pie.setOption(option);
+</script>
+</body>
+</html>
